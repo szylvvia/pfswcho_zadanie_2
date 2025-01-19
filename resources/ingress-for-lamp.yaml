@@ -22,10 +22,3 @@ spec:
             name: apache-service
             port:
               number: 80
-      - path: /mysql
-        pathType: Prefix
-        backend:
-          service:
-            name: mysql
-            port:
-              number: 3306
