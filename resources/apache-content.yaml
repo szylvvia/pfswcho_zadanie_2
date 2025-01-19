@@ -5,5 +5,7 @@ metadata:
 data:
   index.php: |
     <?php
-    echo "Hello, World!";
+      echo "Hello, World!<br>";
+      echo "Apache is working!";
+      echo phpinfo();
     ?>

@@ -1,10 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-ingress
+  name: ingress-for-lamp-stack
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  defaultBackend:
+    service:
+      name: default-backend-service
+      port:
+        number: 80
   rules:
   - host: myapp.local
     http:
@@ -20,6 +25,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: mysql-service
+            name: mysql
             port:
               number: 3306
