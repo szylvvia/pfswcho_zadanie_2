@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-apache
+  template:
+    metadata:
+      labels:
+        app: php-apache
+    spec:
+      containers:
+      - name: php-apache
+        image: php:7.4-apache
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: apache-content
+          mountPath: /var/www/html
+      volumes:
+      - name: apache-content
+        configMap:
+          name: apache-content

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-content
+data:
+  index.php: |
+    <?php
+    echo "Hello, World!";
+    ?>
