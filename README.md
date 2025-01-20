@@ -114,7 +114,8 @@ kubectl exec -it mysql-0 -n zadanie-2 -- /bin/bash
 mysql -u root -p
 ```
 
-![image](https://github.com/user-attachments/assets/b787f5f7-d1da-42ba-b531-251f4fbe4e54)
+![image](https://github.com/user-attachments/assets/39aad443-b255-45e1-a8cb-9db876c2e16d)
+
 
 
 
