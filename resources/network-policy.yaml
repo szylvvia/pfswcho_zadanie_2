@@ -9,5 +9,4 @@ spec:
     - Ingress
   ingress:
     - from:
-      - namespaceSelector: {}
-        podSelector: {}
+      - podSelector: {}
