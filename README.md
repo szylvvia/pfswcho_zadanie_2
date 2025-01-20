@@ -73,7 +73,7 @@ kubectl get pv,pvc -n zadanie-2
 kubectl describe  networkpolicy -n zadanie-2
 ```
 
-![image](https://github.com/user-attachments/assets/eeeec049-f2d7-4cba-8375-e6ea06002f92)
+![image](https://github.com/user-attachments/assets/f67fe5a4-b5fa-4443-a1f2-a44a12e3bf41)
 
 
 ## Sposób dostępu z zewnątrz i weryfikacja działania
@@ -116,7 +116,27 @@ mysql -u root -p
 
 ![image](https://github.com/user-attachments/assets/39aad443-b255-45e1-a8cb-9db876c2e16d)
 
+<p>Dostęp z innej przestrzeni nazw nie jest możliwy, ze względu na zastosowaną NetworkPolicy.</p>
 
+![image](https://github.com/user-attachments/assets/d22dcfde-6daf-42b8-9e84-5e06892d3ec7)
 
+<p>Natomiast w tej samej przestrzeni nazw ruch jest możliwy.</p>
 
+![image](https://github.com/user-attachments/assets/2c67ae74-3f1f-407f-b630-3dfc333d97bd)
+
+<p>W celu sprawdzenia czy skalowanie działa obiektu StatefullSet działa poprawnie wraz ze zdefiniowanymi PV oraz PVC przeskalowano bazę danych do 3 replik za pomocą polecenia: </p>
+
+```
+kubectl scale statefulset mysql --replicas=3 -n zadanie-2
+```
+
+![image](https://github.com/user-attachments/assets/dfe6711f-1208-4610-b8a0-b1fd56011f4c)
+
+<p>Nowe PVC są tworzone automatycznie dla każdego nowego poda w StatefulSet.Każdy PVC jest przypisany do unikalnego PV. </p>
+
+![image](https://github.com/user-attachments/assets/febc18cd-4d6a-46c4-8443-ef18c3a04430)
+
+Podczas skalowania w dół pody sa usuwane w kolejności od największego indeksu.
+
+![image](https://github.com/user-attachments/assets/0ac886c0-7905-49ed-987a-5e1b7f05c122)
 
