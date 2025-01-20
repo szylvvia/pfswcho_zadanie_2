@@ -140,3 +140,25 @@ Podczas skalowania w dół pody sa usuwane w kolejności od największego indeks
 
 ![image](https://github.com/user-attachments/assets/0ac886c0-7905-49ed-987a-5e1b7f05c122)
 
+## Opis wybranych manifestów
+<ul>
+  <li><b>1-namespace-zadanie-2</b> tworzy przestrzeń nazw zadanie-2</li>
+  <li><b>apache-content.yaml</b> tworzy obiekt typu ConfigMap i przechowuje plik index.php z prostym skryptem PHP wyświetlającym komunikaty testowe.</li>
+  <li><b>apache-service</b> tworzy usługę typu ClusterIP, która kieruje ruch na port 80 do podów z selektorem app: php-apache, analogicznie sytuacja wygląda dla pliku default-backend.yaml w sekcji service</li>
+  <li><b>ingress-for-lamp.yaml</b> tworzy zasób Ingress z regułą, która kieruje ruch HTTP na ścieżkę /app w domenie myapp.local do usługi apache-service na porcie 80, a domyślny backend to default-backend-service na porcie 80</li>
+  <li><b>mysql-pv.yaml</b> tworzy zasów PersistentVolume, przydzielający 1Gi pamięci i używający hostPath na ścieżce /mnt/data</li>
+  <li><b>mysql-pvc.yaml</b> żąda 1Gi przestrzeni dyskowej i ma dostęp do PV w trybie ReadWriteOnce</li>
+  <li><b>mysql-secret.yaml oraz php-apache-secret.yaml</b> zawierają zakodowane w base64 dane dostępowe do bazy MySQL</li>
+  <li><b>mysql-statefulset.yaml</b> uruchamia jeden replikę kontenera MySQL, dodaje niezbędne dane konfigurcyjne jak hasła do bazy danych, działa na porcie 3306, implementuje asób PersistentVolumeClaim dla przechowywania danych MySQL na dysku z mysql-pvc</li>
+  <li><b>mysql-pvc.yaml</b> żąda 1Gi przestrzeni dyskowej i ma dostęp do PV w trybie ReadWriteOnce</li>
+  <li><b>network-policy.yaml</b> zezwala na przychodzący ruch (Ingress) do wszystkich podów w tym namespace zadanie-2</li>
+  <li><b>php-apache.yaml</b> uruchamia dwie repliki kontenera PHP-Apache na porcie 80. Montuje wolumen apache-content (pochodzący z ConfigMap), korzystają z danych z sekretów.</li>
+</ul>
+
+## Podsumowanie 
+Pomyślnie udało się wdrożyć stack LAMP w środowisku Kubernetes przy użyciu Minikube. Poszczególne komponenty działają zgodnie z założeniami. Dzięki wykonanym testom, udało się zweryfikować poprawność działania aplikacji, bazy danych oraz wszystkich powiązanych zasobów. Wykonanie tego zadania pozwoliło na zweryfikowanie zdobytych umiejętnosciw praktyczym zatosowanaiu, które są podstawą w rozwiązaniach chmurowych.
+
+<hr>
+<div style="text-align: justify;">
+  <i>Opracowanie zadania powstało w ramach laboratorium.</i>
+</div>
